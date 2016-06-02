@@ -1,10 +1,3 @@
-module.exports = {
-  trace, pipe, pipeP, map, intersection, difference, applyFunctions,
-  last, flip, curry, nth, adjust, toPairs, ifElse,
-  Maybe, Either, IO
-}
-
-
 // FUNCTIONS /////////////////////////////////////////////////////
 
 //:: a -> a
@@ -269,5 +262,17 @@ const IO = (() => {
 
   return Object.freeze(IO)
 })()
+
+
+/////////////////////////////////////////////////////////////////
+
+module.exports = {
+  trace, pipe, pipeP, map, intersection, difference, applyFunctions,
+  last, flip, curry, nth, adjust, toPairs, ifElse,
+  Maybe, Either, IO
+}
+
+
+
 
 
