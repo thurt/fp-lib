@@ -6,6 +6,11 @@ const trace = (x) => {
   return x
 }
 
+//:: Object -> [v]
+const objectValues = (obj) => {
+  return Reflect.ownKeys(obj).map(key => obj[key])
+}
+
 //:: ((a, b, ... -> e), (e -> f), ..., (y -> z)) -> (a, b, ...) -> z
 const pipe = (...fns) => (...xs) => {
   return fns
@@ -167,6 +172,9 @@ const Either = (() => {
         return newE(Left)(fn(me.__value))
       }
     },
+    chain(fn) {
+      return this
+    },
     isLeft: true,
     isRight: false
   })
@@ -180,6 +188,9 @@ const Either = (() => {
       return (fn) => {
         return me.map(fn)
       }
+    },
+    chain(fn) {
+      return fn(this.__value)
     },
     isLeft: false,
     isRight: true
@@ -269,7 +280,7 @@ const IO = (() => {
 module.exports = {
   trace, pipe, pipeP, map, intersection, difference, applyFunctions,
   last, flip, curry, nth, adjust, toPairs, ifElse,
-  Maybe, Either, IO
+  Maybe, Either, IO, objectValues
 }
 
 
