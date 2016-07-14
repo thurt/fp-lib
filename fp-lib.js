@@ -284,6 +284,10 @@ module.exports = {
 }
 
 
+// OTHER IDEAS //////////////////////////////////////////////////
 
+const recurse_reduce = (f) => (a) => ([x, ...xs]) => {
+  return x === undefined ? a : recurse_reduce(f, f(a, x), xs)
+}
 
 
