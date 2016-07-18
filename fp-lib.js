@@ -23,11 +23,30 @@ const pipeP = (...fns) => (...xs) => {
     .reduce((xP, fn) => xP.then(fn), Promise.resolve(fns[0](...xs)))
 }
 
+//:: String -> Object -> a
+const prop = (str) => (obj) => {
+  return obj[str]
+}
+
+//:: String -> [a] -> [Maybe]
+const pluck = (str) => (xs) => {
+  return map(prop(str))(xs)
+}
+
+//:: a -> a -> Boolean
+const is = (test_value) => (value) => {
+  return value === test_value
+}
+
 //:: (a -> b) -> [a] -> [b]
 const map = (fn) => (f) => {
   return f.map(fn)
 }
 
+//:: (a -> b) -> [a] -> [b]
+const filter = (fn) => (xs) => {
+  return xs.filter(fn)
+}
 //:: [a] -> [a] -> [a]
 const intersection = (xs) => (xs2) => {
   return xs.filter(x => xs2.includes(x))
@@ -280,7 +299,7 @@ const IO = (() => {
 module.exports = {
   trace, pipe, pipeP, map, intersection, difference, applyFunctions,
   last, flip, curry, nth, adjust, toPairs, ifElse,
-  Maybe, Either, IO, objectValues
+  Maybe, Either, IO, objectValues, prop, pluck, is, filter
 }
 
 
